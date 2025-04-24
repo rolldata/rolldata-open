@@ -20,6 +20,11 @@
     后续会有Springboot版，Spring Cloud版本，也希望有感兴趣的进行贡献，共创方便使用的快速开发平台。
 - 在线体验：
  **[demo演示](http://www.wrenchdata.com:8082/)** <br>体验用户，通过 **[注册](http://www.wrenchdata.com/trialUser)** 用户，或 体验用户：demo，密码：demo
+- 企业版下载：**[下载](http://www.wrenchdata.com/product/Download/)**
+- 源码仓库地址： **[Gitee](https://gitee.com/rolldata/rolldata-open/)** 、**[GitCode](https://gitcode.com/rolldata/rolldata-open/)** 、**[GitHub](https://github.com/rolldata/rolldata-open/)**
+- 官方网站：**[官网](http://www.wrenchdata.com)**
+- 使用文档：**[在线帮助](http://help.wrenchdata.com/index-0001.html)**
+- 交流社区：**[社区问答](http://help.wrenchdata.com)**
 
 平台企业版已应用于各行业的大中小项目中，以下是各版本功能对比：
 
@@ -110,47 +115,46 @@
 ![数据上报demo1](demo%E6%95%B0%E6%8D%AE%E4%B8%8A%E6%8A%A5demo1.png)
 
 #### 使用配置说明
-    默认使用mysql库，sql路径rollData-ui/resources/sql
-    要求JDK1.8+
-    导入项目到Idea(项目目前使用分模块开发，我们建议是用IDEA开发).
-    修改数据库配置文件dbconfig.properties中的用户密码.
-    启动项目，管理员账号admin/密码123456，管理员默认所有目录和按钮权限
-    角色分为2种，一种普通角色，只看一些前台的业务功能模块，另一种是管理角色，即可以看到控制台的一些管理配置
 
+默认使用mysql库，sql路径rollData-ui/resources/sql<br>
+要求JDK1.8+<br>
+导入项目到Idea(项目目前使用分模块开发，我们建议是用IDEA开发).<br>
+修改数据库配置文件dbconfig.properties中的用户密码.<br>
+启动项目，管理员账号admin/密码123456，管理员默认所有目录和按钮权限<br>
+角色分为2种，一种普通角色，只看一些前台的业务功能模块，另一种是管理角色，即可以看到控制台的一些管理配置
 
 #### 代码示例
-参考rollData-business模块
-目录菜单维护，后台库表wd_sys_function维护系统菜单目录，字段is_admin配置，0前台目录菜单，1后台管理目录菜单，字段power_flag配置后台代码Shiro过滤权限标记
-如：
-`INSERT INTO wd_sys_function (id, func_name, parent_id, href_link, sort, state, c_type, relation_id, is_href, is_system, power_flag, c_system_type, terminal_pc, terminal_ipad,terminal_mobile, icon_class, create_time, create_user, update_time, update_user, is_admin, wd_model_id, business_type) VALUES('2c9a20819623008601962304ed890004', 'demo管理','2c9a20819623008601962304ed890003', 'businessController/demoManage', 1, '1', '0', NULL, NULL, '0', 'sys:business:demoManage', 'business', NULL, NULL, NULL, 'iconfont icon-peizhi', '2025-04-01 00:00:00.0', '4028b88163953a1b01639563f09c0005', NULL, NULL, '0', NULL, NULL);`
+参考rollData-business模块<br>
+目录菜单维护，后台库表wd_sys_function维护系统菜单目录，字段is_admin配置，0前台目录菜单，1后台管理目录菜单，字段power_flag配置后台代码Shiro过滤权限标记<br>
+如：<br>
+```INSERT INTO wd_sys_function (id, func_name, parent_id, href_link, sort, state, c_type, relation_id, is_href, is_system, power_flag, c_system_type, terminal_pc, terminal_ipad,terminal_mobile, icon_class, create_time, create_user, update_time, update_user, is_admin, wd_model_id, business_type) VALUES('2c9a20819623008601962304ed890004', 'demo管理','2c9a20819623008601962304ed890003', 'businessController/demoManage', 1, '1', '0', NULL, NULL, '0', 'sys:business:demoManage', 'business', NULL, NULL, NULL, 'iconfont icon-peizhi', '2025-04-01 00:00:00.0', '4028b88163953a1b01639563f09c0005', NULL, NULL, '0', NULL, NULL);```
 
-目录菜单按钮维护，页面中涉及到按钮操作的均可配置，后台库表wd_sys_function_oper，同样字段power_flag配置后台代码Shiro过滤权限标记
-    如：
-`INSERT INTO wd_sys_function_oper (id, func_id, oper_name, power_flag, create_time) VALUES('4028b881zxcda6f201647daa234xf223', '2c9a20819623008601962304ed890004', '查询','sys:business:query', '2025-04-15 18:44:11.0');`
+目录菜单按钮维护，页面中涉及到按钮操作的均可配置，后台库表wd_sys_function_oper，同样字段power_flag配置后台代码Shiro过滤权限标记<br>
+如：<br>
+```INSERT INTO wd_sys_function_oper (id, func_id, oper_name, power_flag, create_time) VALUES('4028b881zxcda6f201647daa234xf223', '2c9a20819623008601962304ed890004', '查询','sys:business:query', '2025-04-15 18:44:11.0');```
 
-    后台权限标识均放到controller层
+后台权限标识均放到controller层
     
 ```
-    @Controller
-    @RequestMapping("/businessController")
-    @RequiresPathPermission("sys:business")
-    public class BusinessController {
-    }
+@Controller
+@RequestMapping("/businessController")
+@RequiresPathPermission("sys:business")
+public class BusinessController {
+}
+```
+@RequiresPathPermission标签配置权限前缀，具体页面及按钮通过@RequiresMethodPermissions标签
+
+```
+@RequiresMethodPermissions(value = "demoManage")
+@RequestMapping(value = "/demoManage")
+public ModelAndView demoManage(HttpServletRequest request, HttpServletResponse response) {
+    return new ModelAndView("web/business/demoList");
+}
 ```
 
-    @RequiresPathPermission标签配置权限前缀，具体页面及按钮通过@RequiresMethodPermissions标签
+事务默认均service层
 
-```
-    @RequiresMethodPermissions(value = "demoManage")
-    @RequestMapping(value = "/demoManage")
-    public ModelAndView demoManage(HttpServletRequest request, HttpServletResponse response) {
-        return new ModelAndView("web/business/demoList");
-    }
-```
-
-    事务默认均service层
-
-    如果是二开的，模块打成jar包，放入荣培数据企业版webapps\ROOT\WEB-INF\lib下，跟随启动即可
+如果是二开的，模块打成jar包，放入荣培数据企业版webapps\ROOT\WEB-INF\lib下，跟随启动即可
 
 #### 平台目录结构说明
     rollData_open
@@ -164,18 +168,18 @@
         rollData-business	业务模块（可自行仿照新建其他业务模块）
             web		web业务
                 business	业务包（可自行仿照新建其他业务包）
-        rollData-common		公共模块
+        rollData-common     公共模块
             web		web业务
                 system	系统相关		
         rollData-ui		UI模块
             resources	资源
                 i18n	国际化
                 sql		初始化sql文件
-                webapp		web页面相关
-                static		静态资源
+                webapp      web页面相关
+                static      静态资源
                 template	模版文件下载目录
                 uploadFile	上传文件存放目录
-                webpage		页面
+                webpage     页面
 
 #### 技术交流
 - 官方网站：**[官网](http://www.wrenchdata.com)**
@@ -185,4 +189,3 @@
 ![输入图片说明](demowx.png)
 - QQ群：690722171<br>
 ![输入图片说明](demoqq.png)
-- 源码仓库地址： **[Gitee](https://gitee.com/rolldata/rolldata-open/)** 、GitCode、GitHub
