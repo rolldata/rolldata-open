@@ -1,0 +1,181 @@
+.lay-ztree li ul {
+	padding: 0;
+}
+.lay-ztree {
+	padding: 5px 10px;
+}
+.lay-ztree li, .lay-ztree li a {
+	min-height: 30px;
+	vertical-align: middle;
+}
+.lay-ztree li a {
+	padding: 0;
+	width: auto;
+    min-width: 100%;
+	overflow: hidden;
+}
+.lay-ztree li a:hover,
+.lay-ztree li a.curSelectedNode {
+	min-height: 30px;
+	color: #666;
+	border: none;
+	background-color: #eef1fc;
+	opacity: 1;
+}
+.lay-ztree li, .lay-ztree li span {
+	line-height: 30px;
+}
+.lay-ztree li span.button {
+	padding: 0 4px;
+	margin-right: 4px;
+	height: 30px;
+	width: 14px;
+	color: orange;
+	font-size: 16px;
+	line-height: 30px;
+	background: none;
+}
+.lay-ztree li span.button.switch {
+	width: 14px;
+}
+.lay-ztree li span.button.iconfont {
+	line-height: 28px;
+}
+.lay-ztree li span.button.ico_open,
+.lay-ztree li span.button.ico_close {
+	margin-right: 4px;
+	font-family: "iconfont" !important;
+	font-style: normal;
+	vertical-align: middle;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+.lay-ztree li span.button.ico_open::before {
+	content: "\e69b";
+}
+.lay-ztree li span.button.ico_close::before {
+	content: "\e680";
+}
+.lay-ztree li span.button.noline_open,
+.lay-ztree li span.button.noline_close {
+	font-family: layui-icon!important;
+	font-style: normal;
+	min-height: 18px;
+	line-height: 18px;
+	text-align: center;
+	color: #c0c4cc;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+.lay-ztree li span.button.noline_open {
+	transform: rotate(90deg);
+}
+.lay-ztree li span.button.noline_close::before,
+.lay-ztree li span.button.noline_open::before{
+	content: "\e623";
+}
+.lay-ztree li span.button.chk {
+	width: 14px;
+	height: 14px;
+	min-height: 12px;
+	margin-right: 4px;
+	padding-left: 0;
+	padding-right: 0;
+	position: relative;
+	display: inline-block;
+	border: 1px solid #d2d2d2;
+	font-size: 12px;
+	border-radius: 2px;
+	background-color: #fff;
+	-webkit-transition: .1s linear;
+	transition: .1s linear;
+	cursor: pointer;
+	text-align: center;
+	line-height: 14px;
+}
+
+.lay-ztree li span.button.chk.checkbox_true_full,
+.lay-ztree li span.button.chk.checkbox_true_full_focus ,
+.lay-ztree li span.button.chk.checkbox_true_part,
+.lay-ztree li span.button.chk.checkbox_true_part_focus{
+    border-color: #4785e6;
+    background-color: #4785e6;
+    color: #fff;
+}
+.lay-ztree li span.button.chk.checkbox_true_full:before,
+.lay-ztree li span.button.chk.checkbox_true_full_focus:before{
+	font-family: layui-icon!important;
+	font-style: normal;
+	vertical-align: middle;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+    content: "\e605";
+}
+
+.lay-ztree li span.button.chk.checkbox_true_part:after,
+.lay-ztree li span.button.chk.checkbox_true_part_focus:after{
+	font-family: layui-icon!important;
+	font-style: normal;
+	vertical-align: middle;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+    content: "";
+    position: relative;
+    width: 9px;
+    height: 1px;
+    background-color: #fff;
+    display: inline-block;
+    top: -1px;
+}
+.lay-ztree li span.button.chk:hover {
+	border-color: #4785e6;
+}
+.xm-select-tips .xm-cz-group{position: relative; padding:0 10px;line-height: 30px;overflow: hidden;text-align: right;border-bottom:1px solid #eee;}
+.xm-select-tips .xm-cz-group .xm-cz{display: inline-block; margin-left: 20px;cursor: pointer;}
+.xm-select-tips .xm-cz-group .xm-cz i{margin-right: 9px;font-size: 14px;}
+.xm-select-tips .xm-cz:hover{color: #0078be;}
+.xm-select-tips .xm-cz-group.xm-cz-group-mobile {color: #0078be;}
+.xm-select-tips .xm-cz-group.xm-cz-group-mobile .xm-cz {font-size: 12px;}
+#LAY-table-tree li span.button.ico_docu {
+	font-family: iconfont!important;
+	font-style: normal;
+	vertical-align: middle;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+#LAY-table-tree li span.button.ico_docu::before {
+	content: "\e747";
+}
+#LAY-table-tree.lay-ztree li span.button.switch {
+	width: 0;
+}
+#LAY-table-tree li > a {
+	position: relative;
+	padding-right: 25px;
+	box-sizing: border-box;
+}
+.close-cxt {
+	position: absolute;
+	left: -10px;
+	top:0;
+	font-size: 18px;
+}
+.xm-select-tips .xm-cz-group .xm-cz.close-cxt {
+	display: none;
+}
+.xm-select-tips .xm-cz-group.xm-cz-group-mobile .xm-cz.close-cxt,
+.ctxMenu-mobile .close-cxt {
+	display: inline-block;
+}
+@media only screen and (max-device-width: 750px) {
+	.ztree li {
+		display: block;
+	}
+	.ztree li span.button {
+		box-sizing: content-box;
+	}
+}
+.ztree li span.button.ico_loading {
+	background-position: center;
+}
+	

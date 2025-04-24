@@ -1,0 +1,501 @@
+/** 登录页面样式 */
+
+body {
+    /* background-image: url("../static/images/bg_login2.svg");
+    background-position: center 110px; */
+    /* background-image: url("../static/images/login-background.png"); */
+    /* background-position: center 280px; 
+    background-position:-100px;*/
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-color: #2b2d36;
+}
+
+body, html,
+.login-wrapper, 
+.login-wrapper-mobile {
+    height: 100%
+}
+.input {
+    position: relative;
+  }
+  .input .QRcode {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    background: url(../images/QRcode.png) no-repeat 0 0;
+    background-size: contain;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+  }
+  .QRcodes {
+    width: 360px;
+    height: 302px;
+    display: none;
+    position: relative;
+  }
+  .QRcodes img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+  }
+  .QRcodes .inputs {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    background: url(../images/zhdl.png) no-repeat 0 0;
+    background-size: contain;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+  }
+  
+/* .bg_scenes{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(#012843, #010e23);
+    overflow: hidden;
+    vertical-align: middle;
+}
+.bg_scenes .bg_img {
+    position: absolute;
+    top:50%;
+    left:50%;
+    width:auto;
+    height: 100%;
+    transform:translate(-50%,-50%);
+    text-align: center;
+} */
+
+.bg_scenes .scenes1,.bg_scenes .scenes2{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.bg_scenes .scenes1 img{
+    width: 100%; 
+    position: absolute;
+    top: 400px;
+    animation: xuanz 62s linear infinite;
+    -webkit-animation: xuanz 62s linear infinite;
+    -ms-animation: xuanz 62s linear infinite;
+}
+.bg_scenes .scenes2 img{
+    width: 30%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto
+}
+.bg_scenes .scenes3 img{
+    position: absolute;
+    bottom: 50%;
+    left: 5%;
+    width: 17%;
+    animation: xuanz 90s linear infinite;
+    -webkit-animation: xuanz 90s linear infinite;
+    -ms-animation: xuanz 90s linear infinite;
+}
+.bg_scenes .scenes4 img{
+    position: absolute;
+    width: 30%;
+    bottom: 26%;
+    right: 5%;
+    animation: xuanz 90s linear infinite;
+    -webkit-animation: xuanz 90s linear infinite;
+    -ms-animation: xuanz 90s linear infinite;
+}
+.login-wrapper {
+    overflow: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9;
+    background: #fff;
+}
+
+.login-body {
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    min-width: 1338px;
+    min-height: 500px;
+    height: 90.7%;
+}
+.login-wrapper .loginfoot{
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    width: 100%;
+    font-size: 12px;
+    color: #aaa;
+}
+.login-body .layui-input{
+    height: 44px;
+    width: 300px;
+    border-radius: 4px;
+    padding-left: 48px;
+    font-size: 14px;
+}
+.login-body input::-webkit-input-placeholder { 
+    /* WebKit browsers */ 
+    color: #999; 
+} 
+.login-body input:-moz-placeholder { 
+    /* Mozilla Firefox 4 to 18 */ 
+    color: #999; 
+} 
+.login-body input::-moz-placeholder { 
+    /* Mozilla Firefox 19+ */ 
+    color: #999; 
+} 
+.login-body input:-ms-input-placeholder { 
+    /* Internet Explorer 10+ */ 
+    color: #999; 
+}
+
+.login-wrapper-mobile input::-webkit-input-placeholder { 
+    /* WebKit browsers */ 
+    color: #ccc;
+} 
+.login-wrapper-mobile input:-moz-placeholder { 
+    /* Mozilla Firefox 4 to 18 */ 
+    color: #ccc;
+} 
+.login-wrapper-mobile input::-moz-placeholder { 
+    /* Mozilla Firefox 19+ */ 
+    color: #ccc;
+} 
+.login-wrapper-mobile input:-ms-input-placeholder { 
+    /* Internet Explorer 10+ */ 
+    color: #ccc;
+}
+
+.login-body > .layui-card {
+    max-width: 1338px;
+    width: 1338px;
+    height: 100%;
+    min-height: 500px;
+    border: none;
+    background: transparent;
+    box-shadow: 0 1px 2px 0 transparent;
+    margin: 0 auto;
+}
+.login-body .layui-card-body{
+    padding-top: 50px;
+    width: 360px;
+    background: #fff;
+    top: 224px;
+    float: right;
+    box-shadow: 3px 4px 14px 1px rgba(192, 199, 215, 0.35);
+    border-radius: 10px;    
+}
+/* .login-body input:-internal-autofill-selected{
+    background: #fff;
+} */
+
+.login-body .layui-card-header {
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.login-body .layui-form-pane .layui-form-label {
+    width: 48px;
+    height: 42px;
+    line-height: 25px;
+    background: transparent;
+    position: absolute;
+    margin-top: 1px;
+    border: none;
+    z-index: 1;
+    color: #8492A3;
+    padding: 8px 12px;
+}
+.login-body .layui-form-pane .layui-form-label i{
+    font-size: 21px;
+}
+
+.login-body .layui-form-pane .layui-input-block {
+    margin-left: 0;
+    height: 44px;
+}
+.login-body .layui-form-item{
+    margin: 0 auto 24px;
+    width: 300px;
+}
+.login-body .login-captcha {
+    width: 100%;
+    cursor: pointer;
+}
+.login-body .login-other {
+    margin-bottom: 10px;
+    margin-top: -15px;
+}
+.login-body .login-other > * {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+    font-size: 13px;
+    font-style: normal !important;
+}
+.login-body .login-other span{
+    margin-left: 8px;
+    display: inline-block;
+    height: 24px;
+    line-height: 24px
+}
+.login-body .login-other em{
+    height: 14px;
+    width: 1px;
+    display: inline-block;
+    background: #ccc
+}
+
+.login-body .login-other a:hover {
+    color: #2676DE;
+}
+.login-body .login-other .icon-weixin-copy {
+    color: #66BF4C;
+    font-size: 18px;
+}
+.layui-icon-login-qq {
+    color: #3492ED
+}
+
+.layui-icon-login-wechat {
+    color: #4DAF29
+}
+
+.layui-icon-login-weibo {
+    color: #CF1900
+}
+
+/** 底部样式 */
+.login-footer {
+    text-align: center;
+    line-height: 30px;
+    color: rgba(255, 255, 255, 0.7) !important;
+    padding-bottom: 20px;
+}
+
+.login-footer span {
+    padding: 0 5px
+}
+
+.login-footer a {
+    padding: 0 5px;
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.login-footer a:hover {
+    color: rgba(255, 255, 255, 0.4) !important;
+}
+
+/** 头部样式 */
+.login-header {
+    font-family: Myriad Pro, Helvetica Neue, Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.85) !important;
+    height: 52px;
+    background: #fff;
+}
+.login-header .navbar-brand, .login-header .logo-txt {
+    display: inline-block;
+    vertical-align: middle;
+}
+.login-header .navbar-brand{
+    margin-top: 6px;
+    margin-left: 60px;
+}
+.login-header .logo-txt {
+    margin-top: 6px;
+}
+.login-header img {
+    height: 40px;
+}
+
+/** 移动设备样式 */
+@media screen and (min-height: 590px) {
+    .login-footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
+}
+
+@media screen and (min-height: 670px) {
+    .login-body {
+        /* padding: 110px 10px 40px 10px; */
+    }
+}
+
+/** 辅助样式 */
+.layui-link {
+    color: #4785e6 !important;
+}
+
+.layui-link:hover {
+    opacity: .8;
+}
+
+.pull-right {
+    float: right;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.login-header {
+    color: rgba(0, 0, 0, .85) !important;
+}
+
+.login-footer {
+    color: rgba(0, 0, 0, 0.7) !important;
+}
+
+.login-footer a {
+    color: rgba(0, 0, 0, 0.7) !important;
+}
+
+.login-footer a:hover {
+    color: rgba(0, 0, 0, 0.4) !important;
+}
+
+.login-wrapper-mobile {
+	background: url(../images/mobbg.png) no-repeat center;
+	background-size: 100% 100%;
+}
+.loginbox {
+	padding: 100px 20px 80px 20px;
+	text-align: center;
+}
+.loginbox img {
+	width: 210px;
+}
+.mobileFormLogin {
+	padding: 10px 20px;
+    background: #fff;
+    width: 300px;
+    margin: 0 auto;
+    border-radius: 8px;
+	box-shadow: 0px 20px 20px 0px rgba(28, 147, 217, 0.1);
+}
+.mobileFormLogin .layui-form-item {
+	margin-bottom: 30px;
+	border-bottom: 2px solid #D5E1F0;
+}
+.mobileFormLogin .layui-form-item:last-child {
+	border: none;
+}
+.mobileFormLogin .layui-form-item .layui-form-label {
+	margin: 9px 0;
+	padding: 0px 5px;
+	width: 25px;
+	text-align: center;
+	color: #ccc;
+}
+.mobileFormLogin .layui-form-item .layui-form-label .layui-icon {
+	font-size: 18px;
+}
+.mobileFormLogin .layui-form-item .layui-input-block {
+	margin-left: 36px;
+}
+.mobileFormLogin .layui-form-item .layui-input-block .layui-input {
+	color: #000;
+	background-color: transparent;
+	border-color: transparent;
+}
+.mobileFormLogin .layui-form-item .layui-input-block .layui-input:focus,
+.mobileFormLogin .layui-form-item .layui-input-block .layui-input:hover {
+    border-color: transparent!important;
+	border-bottom-color: #0ddeff!important;
+}
+.padshow-btn {
+	position: absolute;
+	top: 50%;
+	right: 5px;
+	margin-top: -10px;
+	height: 20px;
+	width: 20px;
+	color: #ccc;
+}
+.layui-btn-fluid {
+	font-size: 16px;
+    height: 40px;
+    background: linear-gradient(90deg, #2676DE, #5EA3FB);
+    border-radius: 4px;
+}
+@-webkit-keyframes xuanz{
+	from{
+	   transform:rotate(30deg);
+	   -webkit-transform:rotate(0deg);
+	   -ms-transform:rotate(0deg);
+	   -moz-transform:rotate(0deg);
+	}
+	
+	to{
+	    transform:rotate(180deg);
+	    -webkit-transform:rotate(180deg);
+	   -ms-transform:rotate(180deg);
+	   -moz-transform:rotate(180deg);
+	}
+	
+}
+@-ms-keyframes xuanz{
+	from{
+	   transform:rotate(30deg);
+	   -webkit-transform:rotate(0deg);
+	   -ms-transform:rotate(0deg);
+	   -moz-transform:rotate(0deg);
+	}
+	
+	to{
+	    transform:rotate(180deg);
+	    -webkit-transform:rotate(180deg);
+	   -ms-transform:rotate(180deg);
+	   -moz-transform:rotate(180deg);
+	}
+	
+}
+@-moz-keyframes xuanz{
+	from{
+	   transform:rotate(30deg);
+	   -webkit-transform:rotate(0deg);
+	   -ms-transform:rotate(0deg);
+	   -moz-transform:rotate(0deg);
+	}
+	
+	to{
+	    transform:rotate(180deg);
+	    -webkit-transform:rotate(180deg);
+	   -ms-transform:rotate(180deg);
+	   -moz-transform:rotate(180deg);
+	}
+	
+}
+@keyframes xuanz{
+	from{
+	   transform:rotate(30deg);
+	   -webkit-transform:rotate(0deg);
+	   -ms-transform:rotate(0deg);
+	   -moz-transform:rotate(0deg);
+	}
+	
+	to{
+	    transform:rotate(180deg);
+	    -webkit-transform:rotate(180deg);
+	   -ms-transform:rotate(180deg);
+	   -moz-transform:rotate(180deg);
+	}
+	
+}

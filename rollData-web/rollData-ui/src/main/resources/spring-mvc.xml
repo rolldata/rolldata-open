@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.0.xsd
+         http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd 
+		http://www.springframework.org/schema/aop 
+	  http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://cxf.apache.org/jaxws 
+   		http://cxf.apache.org/schemas/jaxws.xsd">
+   		<!--开启注解 -->
+	<context:annotation-config />
+
+	<!-- 自动扫描controller包下的所有类，使其认为spring mvc的控制器 -->
+	<!-- 加载controller的时候,不加载service,因为此时事物并未生效,若此时加载了service,那么事物无法对service进行拦截 -->
+	<context:component-scan base-package="com.rolldata.**.controller" use-default-filters="false">
+		<context:include-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+		<context:include-filter type="annotation"
+			expression="org.springframework.web.bind.annotation.ControllerAdvice" />
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Service" />
+	</context:component-scan>
+	<!-- 引入属性文件 -->
+	<context:property-placeholder location="classpath:sysConfig.properties,classpath:dbconfig.properties,classpath:shiro.properties" />
+	<!-- 配置使Spring采用CGLIB代理 -->
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+	<!-- 当在web.xml 中 DispatcherServlet使用 <url-pattern>/</url-pattern> 映射时，能映射静态资源 -->
+	<mvc:default-servlet-handler />
+	<!-- 静态资源映射 -->
+	<mvc:resources location="/static/" mapping="/static/**" />
+	<mvc:resources location="/uploadFile/" mapping="/uploadFile/**" />
+	
+	<!-- 避免IE执行AJAX时,返回JSON出现下载文件 -->
+	<!-- 开启注解方案 -->  
+    <mvc:annotation-driven >
+    	<!-- 处理responseBody 里面日期类型 -->  
+        <mvc:message-converters register-defaults="true">  
+        <!-- StringHttpMessageConverter编码为UTF-8，防止乱码 -->
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">  
+                <property name="supportedMediaTypes">
+					<list>
+						<value>application/json;charset=UTF-8</value>
+					</list>
+				</property>
+				<property name="prettyPrint" value="false" />
+                <property name="objectMapper">  
+<!--                    <bean class="com.fasterxml.jackson.databind.ObjectMapper">  -->
+<!--                        <property name="dateFormat">  -->
+<!--                            <bean class="java.text.SimpleDateFormat">  -->
+<!--                                <constructor-arg type="java.lang.String" value="yyyy-MM-dd HH:mm:ss" />  -->
+<!--                            </bean>  -->
+<!--                        </property>  -->
+<!--                    </bean>  -->
+					<bean class="com.rolldata.core.common.config.CustomObjectMapper"/>
+                </property>  
+            </bean>  
+            <!-- 避免IE执行AJAX时,返回JSON出现下载文件 -->
+			<bean id="fastJsonHttpMessageConverter"
+				class="com.alibaba.fastjson2.support.spring.http.converter.FastJsonHttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>application/json;charset=UTF-8</value>
+					</list>
+				</property>
+				<!--<property name="serializerFeature"> -->
+				<!--这个地方加上这个功能吧，能自己配置一些东西，比如时间的格式化，null输出""等等 -->
+				<!--</property> -->
+			</bean>
+        </mvc:message-converters>  
+    </mvc:annotation-driven>
+	<!-- 默认访问跳转到登录页面，即定义无Controller的path<->view直接映射    -->
+    <mvc:view-controller path="/" view-name="redirect:/loginController/login"/>
+    
+	<!-- 默认的视图解析器 在上边的解析错误时使用 (默认使用html)- -->
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+<!--		<property name="viewClass"-->
+<!--			value="org.springframework.web.servlet.view.JstlView" />-->
+		<property name="viewClass" value="com.rolldata.core.interceptors.HtmlResourceView"/>
+		<property name="contentType" value="text/html;charset=UTF-8" />
+		<property name="order" value="1" />
+		<property name="prefix" value="/webpage/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+	<!--html配置-->
+	<bean id="htmlviewResolver"
+		  class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="com.rolldata.core.interceptors.HtmlResourceView"/>
+		<property name="order" value="2" />
+		<property name="prefix" value="/static/"/>
+		<property name="suffix" value=".html" />
+		<property name="contentType" value="text/html;charset=UTF-8"></property>
+	</bean>
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
+		p:defaultEncoding="UTF-8">
+		<property name="maxUploadSize">
+			<value>104857600</value>
+		</property>
+		<property name="maxInMemorySize">
+			<value>8192</value>
+		</property>
+	</bean>
+	
+	<!-- 国际化 -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename">
+			<value>i18n/messages</value>
+		</property>
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="cacheSeconds" value="60" />
+	</bean>
+	<bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.SessionLocaleResolver" />
+	<!-- 以下 validator  http://blog.csdn.net/xiaojiesu/article/details/50555714 在使用 mvc:annotation-driven 会 自动注册-->
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>
+        <!-- 如果不加默认到 使用classpath下的 ValidationMessages.properties -->
+        <property name="validationMessageSource" ref="messageSource"/>
+    </bean>
+    <!-- 装配拦截器 -->
+	<mvc:interceptors>
+	    <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"></bean>
+	</mvc:interceptors>
+	<!-- 计划任务后台管理 -->
+	<bean id="schedulerFactoryBean"
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean" />
+		
+    <!-- web完全启动回调 -->
+	<bean class="com.rolldata.core.common.listener.WebStartInitListener" />
+	
+	<!-- 全局变量以便可以获得对应的注入bean -->
+	<bean id="springContextHolder" class="com.rolldata.core.util.SpringContextHolder"  lazy-init="false"/>
+	
+    <!-- Bean解析器,级别高于默认解析器,寻找bean对象进行二次处理 -->
+    <bean id="beanNameViewResolver"
+          class="org.springframework.web.servlet.view.BeanNameViewResolver" p:order="0">
+    </bean>
+	<!-- 异常处理类 -->
+	<bean id="exceptionHandler"
+		class="com.rolldata.core.common.exception.GlobalExceptionResolver" />
+	
+	<bean class="com.rolldata.core.common.exception.DefaultExceptionHandler" />
+	
+	<!-- 计划任务启动监听器 该类同web启动的监听类似，合并为一处启动加载zhaibx 2020.02.06
+	<bean class="com.rolldata.core.task.listener.ScheduleJobInitListener" />-->
+	
+	<!-- 拦截器 -->
+	<mvc:interceptors>
+		<!-- 日志拦截器 -->
+		<bean class="com.rolldata.core.interceptors.LogInterceptor" >
+		      <property name="openAccessLog" value="${openAccessLog}" />
+		</bean>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<!-- 需排除拦截的地址 -->
+			<mvc:exclude-mapping path="/static/**" />
+			<mvc:exclude-mapping path="/uploadFile/**" />
+			<bean class="com.rolldata.core.interceptors.EncodingInterceptor" />
+		</mvc:interceptor>
+		<!-- 安全验证拦截器 -->
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<!-- 需排除拦截的地址 -->
+			<mvc:exclude-mapping path="/static/**" />
+			<mvc:exclude-mapping path="/uploadFile/**" />
+			<bean class="com.rolldata.core.security.interceptor.PermissionInterceptorAdapter" />
+		</mvc:interceptor>
+	</mvc:interceptors>
+
+	<!--验证码-->
+	<bean id="captchaProducer" class="com.google.code.kaptcha.impl.DefaultKaptcha">
+		<property name="config">
+			<bean class="com.google.code.kaptcha.util.Config">
+				<constructor-arg>
+					<props>
+						<prop key="kaptcha.border">no</prop>
+						<prop key="kaptcha.textproducer.char.space">5</prop>
+
+						<!--如果需要生成算法验证码加上一下配置-->
+						<prop key="kaptcha.textproducer.char.string">1234567890</prop>
+
+						<!--字体颜色-->
+						<prop key="kaptcha.textproducer.font.color">51,51,51</prop>
+
+						<!--图片宽-->
+						<prop key="kaptcha.image.width">130</prop>
+
+						<!--干扰线颜色-->
+						<prop key="kaptcha.noise.color">51,51,51</prop>
+
+						<!--背景颜色渐变，开始颜色-->
+						<prop key="kaptcha.background.clear.from">204,204,204</prop>
+
+						<!--背景颜色渐变， 结束颜色-->
+						<prop key="kaptcha.background.clear.to">251,251,251</prop>
+
+						<!--字体-->
+						<prop key="kaptcha.textproducer.font.names">宋体,楷体,微软雅黑</prop>
+
+						<!--图片样式：水纹com.google.code.kaptcha.impl.WaterRipple 鱼眼com.google.code.kaptcha.impl.FishEyeGimpy 阴影com.google.code.kaptcha.impl.ShadowGimpy-->
+						<prop key="kaptcha.obscurificator.impl">com.google.code.kaptcha.impl.WaterRipple</prop>
+					</props>
+				</constructor-arg>
+			</bean>
+		</property>
+	</bean>
+	
+	<!--<import resource="classpath:spring-context-consumer.xml" />
+	<import resource="classpath:spring-context-producer.xml" />-->
+</beans>

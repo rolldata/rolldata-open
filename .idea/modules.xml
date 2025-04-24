@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/rollData-web/rollData-business/rollData-business.iml" filepath="$PROJECT_DIR$/rollData-web/rollData-business/rollData-business.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rollData-web/rollData-common/rollData-common.iml" filepath="$PROJECT_DIR$/rollData-web/rollData-common/rollData-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rollData-core/rollData-core.iml" filepath="$PROJECT_DIR$/rollData-core/rollData-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rollData-web/rollData-web.iml" filepath="$PROJECT_DIR$/rollData-web/rollData-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/rolldata-open.iml" filepath="$PROJECT_DIR$/.idea/rolldata-open.iml" />
+    </modules>
+  </component>
+</project>
